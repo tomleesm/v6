@@ -33,6 +33,15 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        Route::model('m', \App\Member::class);
+
+        /*
+        Route::bind('user', function ($value)
+        {
+            return \App\User::where('name', $value)->firstOrFail();
+        });
+         */
     }
 
     /**
