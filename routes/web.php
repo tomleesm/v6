@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/profile', function () {
+    return view('test');
+});
+Route::post('ignore', function () {
+    return 'csrf disable';
+});
+Route::post('ajax', function() {
+    return 'ajax';
+});
