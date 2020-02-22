@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/view/exists', function () { return View::exists('test') ? 'exist': 'not exist'; });
+Route::get('/view/first', function () { return View::first(['custom.admin', 'admin']); });
+Route::get('/view/pass', function () { return view('greeting', ['name' => 'Tom']); });
