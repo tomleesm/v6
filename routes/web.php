@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome.bfrbb');
+});
+Route::get('/error/tom-exception', function () {
+    throw new \App\Exceptions\TomException;
+});
+Route::get('/error/abort/{code?}/{message?}', function ($code = 404, $message = 'Not Found')
+{
+    abort($code, $message);
 });
