@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/log/{id?}', function ($id = 123) {
+    Log::info('There is a log here', ['id' => $id]);
+    return '<h1>log</h1>';
+});
