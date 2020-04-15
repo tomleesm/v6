@@ -12,5 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('app');
+})->name('home');
+
+Route::get('/about/{id}/product/{pid}', function () {
+    return 'about';
+})->name('about');
+
+Route::get('/blog', function () {
+    return 'blog';
+})->name('blog');
+
+Route::get('/post/{title}', function () {
+    return 'post';
+})->name('post');
+
+Route::get('/category/{id}', function () {
+    return 'category';
+})->name('category');
