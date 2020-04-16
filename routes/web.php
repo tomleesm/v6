@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/search/{query}', function ($query) {
+    return \App\Post::search($query)
+               ->orderBy('id', 'asc')
+               ->get();
+});
