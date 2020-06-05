@@ -41,3 +41,7 @@ Route::get('/home/{user}', 'HomeController@index');
 Route::get('/{locale}/posts', function () {
     return 'en.posts';
 })->name('post.index')->middleware('locale');
+
+Route::get('/url/previous/{arg?}', function ($arg = '') {
+    return dump(url()->previous($arg));
+});
