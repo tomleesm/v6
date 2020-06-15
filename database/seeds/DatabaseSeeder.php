@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Role::class, 10)->create();
         factory(App\RoleUser::class, 20)->create();
         factory(App\History::class, 10)->create();
+        factory(App\Post::class, 10)->create();
+        factory(App\Image::class, 10)->create();
     }
 }
