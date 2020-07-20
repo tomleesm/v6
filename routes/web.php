@@ -1,5 +1,6 @@
 <?php
 
+use App\Notifications\InvoicePaid;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +14,15 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/preview', function() {
+    $user = factory(\App\User::class)->make();
+    return (new InvoicePaid)->toMail($user);
+});
+
+Route::get('/send', function() {
+    $user = factory(\App\User::class)->make();
+    $user->notify(new InvoicePaid);
+    return 'mail sent';
 });
