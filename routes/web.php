@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +15,9 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/sql', function () {
+    $data = DB::table('users')->get();
+    return view('sql', ['data' => $data]);
 });
