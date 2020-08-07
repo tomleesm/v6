@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +13,15 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::get('/paginate', function() {
+    $users = DB::table('users')->paginate(15);
+    return view('paginate', ['users' => $users]);
+});
+
+Route::get('/paginate/simple', function() {
+    $users = DB::table('users')->simplePaginate(10);
+    return view('paginate-simple', ['users' => $users]);
 });
