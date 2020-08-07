@@ -23,5 +23,11 @@ Route::get('/paginate', function() {
 
 Route::get('/paginate/simple', function() {
     $users = DB::table('users')->simplePaginate(10);
+
     return view('paginate-simple', ['users' => $users]);
+});
+
+Route::get('/paginate/oneachside', function() {
+    $users = DB::table('users')->paginate(15);
+    return view('paginate-oneachside', ['users' => $users]);
 });
