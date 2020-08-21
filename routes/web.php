@@ -3,6 +3,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,15 +44,20 @@ Route::get('/paginate/custom', function(Request $request) {
     $currentPage = $currentPage <= 0 ? 1 : $currentPage;
 
     $perPage = 10;
-    $offset = ($currentPage - 1) * $perPage;
-    $items = $users->slice($offset, $perPage);
+    $items = $users->forPage($currentPage, $perPage);
     $total = $users->count();
 
     $users = new LengthAwarePaginator($items, $total, $perPage, $currentPage,
                                       [
                                           'path' => Paginator::resolveCurrentPath(),
-                                          'pageName' => 'page'
+                                          'pageName' => 'page',
                                       ]);
 
+    return view('paginate', ['users' => $users]);
+});
+
+Route::get('/paginate/collection', function(Request $request) {
+    $users = DB::table('users')->get();
+    $users->paginate(10);
     return view('paginate', ['users' => $users]);
 });
