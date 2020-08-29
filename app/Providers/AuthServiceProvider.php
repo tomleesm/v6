@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
+use App\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+         /* 'App\Post' => '\App\Policies\PostPolicy' */
+        /* Post::class => \App\Policies\PostPolicy::class */
     ];
 
     /**
@@ -25,13 +27,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::before(function($user) {
-            return $user->isAdmin();
-        });
-        Gate::after(function($user) {
-            return $user->isGuess();
-        });
 
         Gate::define('edit-settings', function($user) {
             return $user->isAdmin() ? Response::allow() : Response::deny('You must be a super administrator.');
