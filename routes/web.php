@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +14,10 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/uuid/v1', function () {
+    return (string) Str::orderedUuid();
+});
+Route::get('/uuid/v4', function () {
+    return (string) Str::uuid();
 });
