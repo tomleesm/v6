@@ -20,11 +20,14 @@ class DatabaseSeeder extends Seeder
          * 每篇貼文有 1 到 3 個留言(comment)
          **/
         factory(User::class, 10)->create()->each(function($user) {
-            $user->posts()->createMany(
+            $posts = $user->posts()->createMany(
                 factory(Post::class, 20)->make()->toArray()
-            )->each(function($post) {
+            );
+
+            $faker = \Faker\Factory::create();
+            $posts->each(function($post) use($faker) {
                 $post->comments()->createMany(
-                    factory(Comment::class, \Faker\Factory::create()->numberBetween(1, 3))->make()->toArray()
+                    factory(Comment::class, $faker->numberBetween(1, 3))->make()->toArray()
                 );
             });
         });
